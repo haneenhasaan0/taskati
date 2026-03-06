@@ -34,6 +34,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  flutter_svg: ^2.2.4
+  lottie: ^3.3.2
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +63,16 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/lottie/
+  fonts:
+    - family: LexendDeca
+      fonts:
+      - asset: assets/fonts/lexend-deca-vietnamese-400-normal.ttf
+        weight: 400
+      - asset: assets/fonts/lexend-deca-vietnamese-500-normal.ttf
+        weight: 500
+      - asset: assets/fonts/lexend-deca-vietnamese-700-normal.ttf
+        weight: 700
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
