@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/text_styles.dart';
@@ -23,7 +24,7 @@ class DailyProgress extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '17 Feb',
+                  DateFormat("EEE, dd MMM").format(DateTime.now()),
                   style: TextStyles.caption1.copyWith(
                     fontWeight: FontWeight.w600,
                     color: AppColors.backgroundColor,
