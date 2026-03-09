@@ -3,8 +3,10 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:taskati/core/functions/navigations.dart';
 import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/text_styles.dart';
+import 'package:taskati/features/add_task/screens/add_edit_task_screen.dart';
 
 import 'package:taskati/features/home/widgets/daily_progress.dart';
 import 'package:taskati/features/home/widgets/home_date_picker.dart';
@@ -26,7 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: AppColors.backgroundColor,
+          onPressed: () {
+            pushTo(context, AddEditTaskScreen());
+          },
           child: const Icon(Icons.add),
         ),
         body: Padding(

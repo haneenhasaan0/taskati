@@ -13,7 +13,11 @@ class CustomTextFormField extends StatelessWidget {
     this.onTap,
     this.onChanged,
     this.controller,
+    this.contentPadding,
+    this.maxLines,
+    this.minLines,
   });
+
   final String? hintText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -23,6 +27,10 @@ class CustomTextFormField extends StatelessWidget {
   final Function()? onTap;
   final Function(String)? onChanged;
   final TextEditingController? controller;
+
+  final EdgeInsetsGeometry? contentPadding;
+  final int? maxLines;
+  final int? minLines;
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +50,13 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         enabled: enabled,
         keyboardType: keyboardType,
+        maxLines: maxLines,
+        minLines: minLines,
         decoration: InputDecoration(
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           hintText: hintText,
+          contentPadding: contentPadding,
         ),
         validator: validator,
         onTap: onTap,
