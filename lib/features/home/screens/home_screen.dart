@@ -1,7 +1,10 @@
 // import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:taskati/core/styles/colors.dart';
+import 'package:taskati/core/styles/text_styles.dart';
 
 import 'package:taskati/features/home/widgets/daily_progress.dart';
 import 'package:taskati/features/home/widgets/home_date_picker.dart';
@@ -22,27 +25,118 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              HomeHeader(),
-              Gap(24),
-              DailyProgress(),
-              Gap(24),
-              HomeDatePicker(
-                onDateChange: (date) {
-                  setState(() {
-                    //  print(date);    // 2026-03-24 00:00:00.000          // 2026-03-20 00:00:00.000
-                    selectedDate = DateFormat('dd MMM, yyyy').format(date);
-                    // print(selectedDate);    //  20 Mar, 2026
-                  });
-                },
-              ),
-            ],
+          child: DefaultTabController(
+            length: 3,
+            child: Column(
+              children: [
+                HomeHeader(),
+                Gap(24),
+                DailyProgress(),
+                Gap(24),
+                HomeDatePicker(
+                  onDateChange: (date) {
+                    setState(() {
+                      //  print(date);    // 2026-03-24 00:00:00.000          // 2026-03-20 00:00:00.000
+                      selectedDate = DateFormat('dd MMM, yyyy').format(date);
+                      // print(selectedDate);    //  20 Mar, 2026
+                    });
+                  },
+                ),
+                Gap(16),
+                _filterTabs(context),
+                Gap(20),
+                _tasksList(),
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Expanded _tasksList() {
+    return Expanded(
+      child: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+          ListView.separated(
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return Container(
+                height: 80,
+                decoration: BoxDecoration(
+                  color: AppColors.accentColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              );
+            },
+
+            separatorBuilder: (context, index) => Gap(12),
+          ),
+          ///////////////////////////////////////////
+          ListView.separated(
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return Container(
+                height: 80,
+                decoration: BoxDecoration(
+                  color: AppColors.accentColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              );
+            },
+
+            separatorBuilder: (context, index) => Gap(12),
+          ),
+          //////////////////////////
+          ListView.separated(
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return Container(
+                height: 80,
+                decoration: BoxDecoration(
+                  color: AppColors.accentColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              );
+            },
+
+            separatorBuilder: (context, index) => Gap(12),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ButtonsTabBar _filterTabs(BuildContext context) {
+    return ButtonsTabBar(
+      backgroundColor: AppColors.primaryColor,
+      borderWidth: 3,
+      borderColor: Colors.black,
+      labelStyle: TextStyles.caption1.copyWith(
+        color: AppColors.backgroundColor,
+        fontWeight: FontWeight.bold,
+      ),
+      unselectedLabelStyle: TextStyles.caption1.copyWith(
+        color: AppColors.primaryColor,
+        // fontWeight: FontWeight.bold,
+      ),
+      unselectedBackgroundColor: AppColors.accentColor,
+      radius: 12,
+      buttonMargin: EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+      contentCenter: true,
+      width: (MediaQuery.sizeOf(context).width - 40) / 3,
+      tabs: [
+        Tab(text: 'All'),
+        Tab(text: 'In Progress'),
+        Tab(text: 'Completed'),
+      ],
     );
   }
 }
