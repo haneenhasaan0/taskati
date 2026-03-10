@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:taskati/core/constants/app_images.dart';
 import 'package:taskati/core/functions/navigations.dart';
+import 'package:taskati/core/services/hive_helper.dart';
 import 'package:taskati/core/services/shared_pref.dart';
 import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/text_styles.dart';
@@ -19,7 +20,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    bool isUploaded = SharedPref.getBool(SharedPref.isUploadedKey);
+    // bool isUploaded = SharedPref.getBool(SharedPref.isUploadedKey);
+        bool isUploaded = HiveHelper.getData(HiveHelper.isUploadedKey ) == true;
+
     Future.delayed(const Duration(seconds: 5), () {
       if (isUploaded) {
         pushReplacement(context, const HomeScreen());

@@ -2,7 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:taskati/core/constants/app_images.dart';
-import 'package:taskati/core/services/shared_pref.dart';
+import 'package:taskati/core/services/hive_helper.dart';
+// import 'package:taskati/core/services/shared_pref.dart';
 import 'package:taskati/core/styles/text_styles.dart';
 
 class HomeHeader extends StatefulWidget {
@@ -18,13 +19,18 @@ class _HomeHeaderState extends State<HomeHeader> {
   @override
   void initState() {
     super.initState();
-    getUserData();
+    // getUserData();
+    getCachedData();
   }
 
-  Future<void> getUserData() async {
-    name = SharedPref.getString(SharedPref.nameKey);
-    path = SharedPref.getString(SharedPref.imageKey);
-    setState(() {});
+  // Future<void> getUserData() async {
+  //   name = SharedPref.getString(SharedPref.nameKey);
+  //   path = SharedPref.getString(SharedPref.imageKey);
+  //   setState(() {});
+  // }
+    Future<void> getCachedData() async {
+    name = HiveHelper.getData(HiveHelper.nameKey);
+    path = HiveHelper.getData(HiveHelper.imageKey);
   }
 
   @override

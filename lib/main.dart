@@ -1,15 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hive_ce/hive_ce.dart';
 import 'package:taskati/core/constants/app_images.dart';
-import 'package:taskati/core/services/shared_pref.dart';
+import 'package:taskati/core/services/hive_helper.dart';
+// import 'package:taskati/core/services/shared_pref.dart';
 import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/themes.dart';
 import 'package:taskati/features/splash/splash_screen.dart';
 
 Future<void> main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-  await SharedPref.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  // await SharedPref.init();
+  await HiveHelper.init();
   runApp(const Taskati());
 }
 
