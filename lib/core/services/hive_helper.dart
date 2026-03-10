@@ -1,6 +1,6 @@
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:taskati/core/models/task_model.dart';
-import 'package:taskati/hive/hive_registrar.g.dart';
+import 'package:taskati/core/hive/hive_registrar.g.dart';
 
 abstract class HiveHelper {
   // boxes

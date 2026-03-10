@@ -3,7 +3,7 @@
 // Check in to version control
 
 import 'package:hive_ce/hive_ce.dart';
-import 'package:taskati/hive/hive_adapters.dart';
+import 'package:taskati/core/hive/hive_adapters.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
