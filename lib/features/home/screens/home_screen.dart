@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:taskati/core/functions/navigations.dart';
+import 'package:taskati/core/models/task_model.dart';
+import 'package:taskati/core/services/hive_helper.dart';
 import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/text_styles.dart';
 import 'package:taskati/features/add_task/screens/add_edit_task_screen.dart';
@@ -12,6 +14,7 @@ import 'package:taskati/features/home/widgets/daily_progress.dart';
 import 'package:taskati/features/home/widgets/home_date_picker.dart';
 
 import 'package:taskati/features/home/widgets/home_header.dart';
+import 'package:taskati/features/home/widgets/tasks/tasks_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -71,50 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: TabBarView(
         physics: NeverScrollableScrollPhysics(),
         children: [
-          ListView.separated(
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return Container(
-                height: 80,
-                decoration: BoxDecoration(
-                  color: AppColors.accentColor,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              );
-            },
-
-            separatorBuilder: (context, index) => Gap(12),
-          ),
-          ///////////////////////////////////////////
-          ListView.separated(
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return Container(
-                height: 80,
-                decoration: BoxDecoration(
-                  color: AppColors.accentColor,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              );
-            },
-
-            separatorBuilder: (context, index) => Gap(12),
-          ),
-          //////////////////////////
-          ListView.separated(
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return Container(
-                height: 80,
-                decoration: BoxDecoration(
-                  color: AppColors.accentColor,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              );
-            },
-
-            separatorBuilder: (context, index) => Gap(12),
-          ),
+          TasksBuilder(),
+          TasksBuilder(),
+          TasksBuilder(),
         ],
       ),
     );

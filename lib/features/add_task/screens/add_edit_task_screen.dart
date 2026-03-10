@@ -3,12 +3,15 @@ import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:taskati/core/constants/app_images.dart';
 import 'package:taskati/core/functions/navigations.dart';
+import 'package:taskati/core/models/task_model.dart';
+import 'package:taskati/core/services/hive_helper.dart';
 import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/text_styles.dart';
 import 'package:taskati/core/widgets/custom_svg_picture.dart';
 import 'package:taskati/core/widgets/custom_text_form_field.dart';
 import 'package:taskati/core/widgets/main_button.dart';
 import 'package:taskati/features/add_task/widgets/task_date_time_card.dart';
+import 'package:taskati/features/home/screens/home_screen.dart';
 
 class AddEditTaskScreen extends StatefulWidget {
   const AddEditTaskScreen({super.key});
@@ -130,7 +133,17 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
         child: MainButton(
           text: 'Add Task',
           onPressed: () {
-            popFrom(context);
+          String  id = DateTime.now().microsecondsSinceEpoch.toString();
+            HiveHelper.cacheTask(id, 
+            TaskModel(id: id,
+             title: _titleController.text,
+              description: _descriptionController.text,
+               date: _date,
+                startTime: _startTime
+                , endTime: _endTime,
+                 isCompleted: false));
+            // popFrom(context);
+            pushReplacement(context, HomeScreen());
           },
         ),
       ),
