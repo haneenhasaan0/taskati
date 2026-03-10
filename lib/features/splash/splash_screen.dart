@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:taskati/core/constants/app_images.dart';
 import 'package:taskati/core/functions/navigations.dart';
 import 'package:taskati/core/services/hive_helper.dart';
-import 'package:taskati/core/services/shared_pref.dart';
+// import 'package:taskati/core/services/shared_pref.dart';
 import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/text_styles.dart';
 import 'package:taskati/features/complete_profile/complete_profile_screen.dart';

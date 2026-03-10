@@ -1,8 +1,11 @@
-
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
+import 'package:taskati/core/models/task_model.dart';
+import 'package:taskati/hive/hive_registrar.g.dart';
+
 abstract class HiveHelper {
   // boxes
   static late Box userBox;
+  static late Box<TaskModel> taskBox;
 
   // box keys
   static String userBoxKey = 'userBox';
@@ -13,12 +16,11 @@ abstract class HiveHelper {
   static String imageKey = 'image';
   static String isUploadedKey = 'isUploaded';
 
-
-
   static Future<void> init() async {
     await Hive.initFlutter();
+    Hive.registerAdapters();
     userBox = await Hive.openBox(userBoxKey);
-
+    taskBox = await Hive.openBox<TaskModel>(taskBoxKey);
   }
 
   static Future<void> setUserData(String name, String image) async {
@@ -34,4 +36,12 @@ abstract class HiveHelper {
     return userBox.get(key);
   }
 
+
+    static Future<void> cacheTask(String key, TaskModel value) async {
+    await taskBox.put(key, value);
+  }
+
+  static TaskModel? getTask(String key) {
+    return taskBox.get(key);
+  }
 }
