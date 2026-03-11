@@ -2,10 +2,13 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:taskati/core/functions/navigations.dart';
 import 'package:taskati/core/models/task_model.dart';
 import 'package:taskati/core/services/hive_helper.dart';
+// import 'package:taskati/core/models/task_model.dart';
+// import 'package:taskati/core/services/hive_helper.dart';
 import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/text_styles.dart';
 import 'package:taskati/features/add_task/screens/add_edit_task_screen.dart';
@@ -69,19 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Expanded _tasksList() {
-    return Expanded(
-      child: TabBarView(
-        physics: NeverScrollableScrollPhysics(),
-        children: [
-          TasksBuilder(),
-          TasksBuilder(),
-          TasksBuilder(),
-        ],
-      ),
-    );
-  }
-
   ButtonsTabBar _filterTabs(BuildContext context) {
     return ButtonsTabBar(
       backgroundColor: AppColors.primaryColor,
@@ -105,6 +95,37 @@ class _HomeScreenState extends State<HomeScreen> {
         Tab(text: 'In Progress'),
         Tab(text: 'Completed'),
       ],
+    );
+  }
+
+  Expanded _tasksList() {
+    return Expanded(
+      child: ValueListenableBuilder<Box<TaskModel>>(
+        valueListenable: HiveHelper.taskBox.listenable(),
+        builder: (context, box, child) {
+          // final tasks = HiveHelper.taskBox.values.toList();
+          final List<TaskModel> dailyTasks = [];
+          for (var task in box.values) {
+            if (task.date == selectedDate) {
+              dailyTasks.add(task);
+            }
+          }
+          final inProgressTasks = dailyTasks
+              .where((task) => !task.isCompleted)
+              .toList();
+          final completedTasks = dailyTasks
+              .where((task) => task.isCompleted)
+              .toList();
+          return TabBarView(
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              TasksBuilder(tasks: dailyTasks),
+              TasksBuilder(tasks: inProgressTasks),
+              TasksBuilder(tasks: completedTasks),
+            ],
+          );
+        },
+      ),
     );
   }
 }

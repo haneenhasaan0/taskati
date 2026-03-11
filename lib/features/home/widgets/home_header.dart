@@ -28,7 +28,7 @@ class _HomeHeaderState extends State<HomeHeader> {
   //   path = SharedPref.getString(SharedPref.imageKey);
   //   setState(() {});
   // }
-    Future<void> getCachedData() async {
+  Future<void> getCachedData() async {
     name = HiveHelper.getData(HiveHelper.nameKey);
     path = HiveHelper.getData(HiveHelper.imageKey);
   }
@@ -45,6 +45,9 @@ class _HomeHeaderState extends State<HomeHeader> {
                   width: 55,
                   height: 55,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(AppImages.user, height: 50);
+                  },
                 ),
         ),
         Gap(12),
