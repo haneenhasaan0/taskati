@@ -11,11 +11,10 @@ import 'package:taskati/core/widgets/custom_svg_picture.dart';
 import 'package:taskati/core/widgets/custom_text_form_field.dart';
 import 'package:taskati/core/widgets/main_button.dart';
 import 'package:taskati/features/add_task/widgets/task_date_time_card.dart';
-import 'package:taskati/features/home/screens/home_screen.dart';
 
 class AddEditTaskScreen extends StatefulWidget {
-  const AddEditTaskScreen({super.key});
-
+  const AddEditTaskScreen({super.key, this.task});
+  final TaskModel? task;
   @override
   State<AddEditTaskScreen> createState() => _AddEditTaskScreenState();
 }
@@ -31,11 +30,21 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController();
-    _descriptionController = TextEditingController();
-    _date = DateFormat('dd MMM, yyyy').format(DateTime.now());
-    _startTime = DateFormat('hh:mm a').format(DateTime.now());
-    _endTime = DateFormat('hh:mm a').format(DateTime.now());
+    // _titleController = TextEditingController();
+    // _descriptionController = TextEditingController();
+    // _date = DateFormat('dd MMM, yyyy').format(DateTime.now());
+    // _startTime = DateFormat('hh:mm a').format(DateTime.now());
+    // _endTime = DateFormat('hh:mm a').format(DateTime.now());
+    _titleController = TextEditingController(text: widget.task?.title ?? '');
+    _descriptionController = TextEditingController(
+      text: widget.task?.description ?? '',
+    );
+    _date =
+        widget.task?.date ?? DateFormat('dd MMM, yyyy').format(DateTime.now());
+    _startTime =
+        widget.task?.startTime ?? DateFormat('hh:mm a').format(DateTime.now());
+    _endTime =
+        widget.task?.endTime ?? DateFormat('hh:mm a').format(DateTime.now());
   }
 
   @override
@@ -59,7 +68,8 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
             // color: context.theme.iconTheme.color,
           ),
         ),
-        title: Text('Add Task'),
+        // title: Text('Add Task'),
+          title: Text(widget.task != null ? 'Edit Task' : 'Add Task'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -131,19 +141,56 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.fromLTRB(22, 8, 22, 30),
         child: MainButton(
-          text: 'Add Task',
-          onPressed: () {
-          String  id = DateTime.now().microsecondsSinceEpoch.toString();
-            HiveHelper.cacheTask(id, 
-            TaskModel(id: id,
-             title: _titleController.text,
-              description: _descriptionController.text,
-               date: _date,
-                startTime: _startTime
-                , endTime: _endTime,
-                 isCompleted: false));
-            // popFrom(context);
-            pushReplacement(context, HomeScreen());
+          // text: 'Add Task',
+                    text: widget.task != null ? 'Save' : 'Add Task',
+
+          // onPressed: () {
+          //   String id = DateTime.now().microsecondsSinceEpoch.toString();
+          //   HiveHelper.cacheTask(
+          //     id,
+          //     TaskModel(
+          //       id: id,
+          //       title: _titleController.text,
+          //       description: _descriptionController.text,
+          //       date: _date,
+          //       startTime: _startTime,
+          //       endTime: _endTime,
+          //       isCompleted: false,
+          //     ),
+          //   );
+          //   // popFrom(context);
+          //   pushReplacement(context, HomeScreen());
+          // },
+                    onPressed: () {
+            if (widget.task != null) {
+              HiveHelper.cacheTask(
+                widget.task!.id,
+                TaskModel(
+                  id: widget.task!.id,
+                  title: _titleController.text,
+                  description: _descriptionController.text,
+                  date: _date,
+                  startTime: _startTime,
+                  endTime: _endTime,
+                  isCompleted: false,
+                ),
+              );
+            } else {
+              String id = DateTime.now().millisecondsSinceEpoch.toString();
+              HiveHelper.cacheTask(
+                id,
+                TaskModel(
+                  id: id,
+                  title: _titleController.text,
+                  description: _descriptionController.text,
+                  date: _date,
+                  startTime: _startTime,
+                  endTime: _endTime,
+                  isCompleted: false,
+                ),
+              );
+            }
+            popFrom(context);
           },
         ),
       ),
