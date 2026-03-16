@@ -1,5 +1,6 @@
 class AppImages {
   static const String logoJson = 'assets/lottie/logo.json';
+  static const String noResultLottie = 'assets/lottie/no_result_found.json';
   static const String backSvg = 'assets/icons/back.svg';
   static const String calendar = 'assets/icons/calendar.svg';
   static const String deleteSvg = 'assets/icons/delete.svg';

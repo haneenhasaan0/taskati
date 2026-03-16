@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
+import 'package:lottie/lottie.dart';
+import 'package:taskati/core/constants/app_images.dart';
 import 'package:taskati/core/functions/navigations.dart';
 import 'package:taskati/core/models/task_model.dart';
 import 'package:taskati/core/services/hive_helper.dart';
@@ -26,9 +28,25 @@ class _TasksBuilderState extends State<TasksBuilder> {
 
   @override
   Widget build(BuildContext context) {
+    // if (widget.tasks.isEmpty) {
+    //   return Center(child: Text('No tasks found'));
+    // }
+    if (widget.tasks.isEmpty) {
+      return Center(
+        child: Lottie.asset(
+          AppImages.noResultLottie,
+          width: 250,
+          height: 250,
+          errorBuilder: (context, error, stackTrace) {
+            return const Icon(Icons.error, size: 100, color: Colors.red);
+          },
+        ),
+      );
+    }
     return ListView.separated(
       // itemCount: 3,
       // itemCount:tasks.length,
+      padding: EdgeInsets.only(bottom: 60),
       itemCount: widget.tasks.length,
 
       itemBuilder: (context, index) {
