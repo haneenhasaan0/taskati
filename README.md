@@ -1,17 +1,38 @@
-# taskati
+# Weight Task 🏋️‍♀️
 
-A new Flutter project.
+Flutter application for tracking weight and related tasks.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(38).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(39).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(40).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(41).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(42).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(43).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(44).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(45).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(46).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(48).png" />
+> ملاحظة: لو اسم الـ branch عندك مش `dev` غيريه بـ `main` أو الاسم الصحيح.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Features
+- Track weight easily
+- Clean and simple UI
+- Built with Flutter & Dart
+
+---
+
+## 🛠️ Tech Stack
+- Flutter
+- Dart
+- Material Design
+
+---
+
+## 📂 Project Structure
+
