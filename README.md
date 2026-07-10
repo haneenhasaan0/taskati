@@ -1,16 +1,28 @@
-# taskati
+# Weight Task 🏋️‍♀️
 
-A new Flutter project.
+Flutter application for tracking weight and related tasks.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📱 Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(38).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(39).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(40).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(41).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(42).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(43).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(44).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(45).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(46).png" />
+<img src="https://github.com/haneenhasaan0/taskati/blob/main/screenshots/Screenshot%20(48).png" />
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Features
+**Taskaty** is a modern Flutter task management application designed to help users organize their daily activities efficiently. The app allows users to create, edit, delete, and categorize tasks, set due dates and priorities, and track their progress through an intuitive and user-friendly interface. Built with clean architecture principles and state management, Taskaty provides a smooth user experience while demonstrating scalable Flutter development practices and responsive UI design.
+
+---
+
+## 📂 Project Structure
+
