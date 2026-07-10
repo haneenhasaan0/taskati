@@ -1,18 +1,21 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:taskati/core/functions/navigations.dart';
 import 'package:taskati/core/models/task_model.dart';
-import 'package:taskati/core/services/hive_helper.dart';
 import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/text_styles.dart';
 import 'package:taskati/features/add_task/screens/add_edit_task_screen.dart';
-
-import 'package:taskati/features/home/widgets/daily_progress.dart';
+import 'package:taskati/features/complete_profile/complete_profile_screen.dart';
 import 'package:taskati/features/home/widgets/home_date_picker.dart';
 
 import 'package:taskati/features/home/widgets/home_header.dart';
+import 'package:taskati/features/home/widgets/tasks/task_builder.dart';
+import 'package:taskati/features/home/widgets/tasks/task_card.dart';
+
+import '../../../hive/hive_helper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,11 +26,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String selectedDate = DateFormat('dd MMM, yyyy').format(DateTime.now());
+  
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>CompleteProfileScreen()));},
+              icon: Icon(
+                Icons.arrow_back, color: AppColors.blackColor, size: 30,)),
+        ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: AppColors.primaryColor,
           foregroundColor: AppColors.backgroundColor,
@@ -49,16 +59,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 HomeDatePicker(
                   onDateChange: (date) {
                     setState(() {
-                      //  print(date);    // 2026-03-24 00:00:00.000          // 2026-03-20 00:00:00.000
-                      selectedDate;
-                      // print(selectedDate);    //  20 Mar, 2026
+                      selectedDate=DateFormat('dd MMM, yyyy').format(date);
                     });
                   },
                 ),
                 Gap(16),
-                _filterTabs(context),
+               _filterTabs(context),
                 Gap(20),
-                //_tasksList(),
+                ValueListenableBuilder<Box<TaskModel>>(
+                  valueListenable: HiveHelperr.taskBox.listenable(),
+                  builder:(context,box,child) {
+                    List<TaskModel> tasks=[];
+                    for(var anyTask in box.values){
+                      if(anyTask.date==selectedDate){
+                        tasks.add(anyTask);
+                      }
+                    }
+                    final List<TaskModel> inProgressTask=tasks.where((task)=>!task.isCompleted).toList();
+                    final List<TaskModel> completedTask=tasks.where((task)=>task.isCompleted).toList();
+                    return Expanded(child: TabBarView(children: [
+                      TaskBuilder(tasks: tasks),
+                      TaskBuilder(tasks: inProgressTask),
+                      TaskBuilder(tasks: completedTask),
+                    ]));
+                  }
+                )
               ],
             ),
           ),
@@ -94,51 +119,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
-
-  Expanded _tasksList() {
-    var tasks = HiveHelper.taskBox.values.toList();
-
-    return Expanded(
-      child: ListView.builder(
-        itemCount: tasks.length,
-        itemBuilder: (context, index) {
-          final task = tasks[index];
-
-          return ListTile(
-            title: Text(task.title ?? ''),
-          );
-        },
-      ),
-    );
-  }
 }
-      // Expanded(
-      // child: ValueListenableBuilder<Box<TaskModel>>(
-      //   valueListenable: HiveHelper.taskBox.listenable(),
-      //   builder: (context, box, child) {
-      //     // final tasks = HiveHelper.taskBox.values.toList();
-      //     final List<TaskModel> dailyTasks = [];
-      //     for (var task in box.values) {
-      //       if (task.date == selectedDate) {
-      //         dailyTasks.add(task);
-      //       }
-    //       }
-    //       final inProgressTasks = dailyTasks
-    //           .where((task) => !task.isCompleted)
-    //           .toList();
-    //       final completedTasks = dailyTasks
-    //           .where((task) => task.isCompleted)
-    //           .toList();
-    //       return TabBarView(
-    //         physics: NeverScrollableScrollPhysics(),
-    //         children: [
-    //           TasksBuilder(tasks: dailyTasks),
-    //           TasksBuilder(tasks: inProgressTasks),
-    //           TasksBuilder(tasks: completedTasks),
-    //         ],
-    //       );
-    //     },
-    //   ),
-    // );
-//  }
+
 

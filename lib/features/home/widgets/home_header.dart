@@ -6,6 +6,8 @@ import 'package:taskati/core/services/hive_helper.dart';
 // import 'package:taskati/core/services/shared_pref.dart';
 import 'package:taskati/core/styles/text_styles.dart';
 
+import '../../../hive/hive_helper.dart';
+
 class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
 
@@ -29,8 +31,8 @@ class _HomeHeaderState extends State<HomeHeader> {
   //   setState(() {});
   // }
   Future<void> getCachedData() async {
-    name = HiveHelper.getData(HiveHelper.nameKey);
-    path = HiveHelper.getData(HiveHelper.imageKey);
+    name = HiveHelperr.getUserData("name")??"";
+    path = HiveHelperr.getUserData("image")??"";
   }
 
   @override

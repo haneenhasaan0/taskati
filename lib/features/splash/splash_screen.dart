@@ -8,6 +8,7 @@ import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/text_styles.dart';
 import 'package:taskati/features/complete_profile/complete_profile_screen.dart';
 import 'package:taskati/features/home/screens/home_screen.dart';
+import 'package:taskati/hive/hive_helper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,10 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // bool isUploaded = SharedPref.getBool(SharedPref.isUploadedKey);
-        bool isUploaded = HiveHelper.getData(HiveHelper.isUploadedKey ) == true;
-
+       // bool isUploaded = HiveHelper.getData(HiveHelper.isUploadedKey ) == true;
+   final user = HiveHelperr.getUserData("name");
     Future.delayed(const Duration(seconds: 5), () {
-      if (isUploaded) {
+      if (user!=null) {
         pushReplacement(context, const HomeScreen());
       } else {
         pushReplacement(context, const CompleteProfileScreen());

@@ -14,6 +14,7 @@ import 'package:taskati/core/widgets/main_button.dart';
 import 'package:taskati/core/widgets/tab_button.dart';
 import 'package:taskati/features/home/screens/home_screen.dart';
 import 'package:taskati/core/helpers/error_snackbar.dart';
+import 'package:taskati/hive/hive_helper.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({super.key});
@@ -24,11 +25,14 @@ class CompleteProfileScreen extends StatefulWidget {
 
 class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   String? path;
+  String imageKey="image",nameKey="name";
+  String passed="passed";
   final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Complete Profile')),
+      appBar: AppBar(
+          title: Text('Complete Profile')),
       body: Padding(
         padding: const EdgeInsets.all(22),
         child: SingleChildScrollView(
@@ -109,24 +113,21 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
         child: MainButton(
           text: 'Let\'s Start!',
           onPressed: () async {
-            if (path != null && controller.text.isNotEmpty) {
-              await HiveHelper.setUserData(controller.text, path!);
-              await HiveHelper.cacheData(HiveHelper.isUploadedKey, true);
+            if (controller.text.isNotEmpty) {
+              await HiveHelperr.cashedUser(nameKey, controller.text);
+              await HiveHelperr.cashedUser(imageKey, path);
+              await HiveHelperr.cashedUser(passed, true);
+              // await HiveHelper.setUserData(controller.text, path!);
+              // await HiveHelper.cacheData(HiveHelper.isUploadedKey, true);
               // await SharedPref.setUserInfo(controller.text, path!);
               // await SharedPref.setBool(SharedPref.isUploadedKey, true);
               // navigate to next screen
               pushReplacement(context, HomeScreen());
-            } else if (path == null && controller.text.isNotEmpty) {
+            }
               // showErrorDialog(context, 'select profile image');
-              showErrorSnackBar(context, 'Please select a profile image.');
-            } else if (path != null && controller.text.isEmpty) {
+            else if (controller.text.isEmpty) {
               // showErrorDialog(context, 'enter your name');
               showErrorSnackBar(context, 'Please enter your name.');
-            } else {
-              showErrorSnackBar(
-                context,
-                'Please select a profile image and enter your name.',
-              );
             }
           },
         ),

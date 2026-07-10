@@ -9,10 +9,14 @@ import 'package:taskati/core/styles/colors.dart';
 import 'package:taskati/core/styles/themes.dart';
 import 'package:taskati/features/splash/splash_screen.dart';
 
+import 'hive/hive_helper.dart';
+
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await SharedPref.init();
-  await HiveHelper.init();
+  //await HiveHelperr.init();
+  await HiveHelperr.init();
   runApp(const Taskati());
 }
 
