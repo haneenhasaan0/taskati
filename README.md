@@ -1,4 +1,4 @@
-# Weight Task 🏋️‍♀️
+# Taskatii
 
 Flutter application for tracking weight and related tasks.
 
