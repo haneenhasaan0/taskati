@@ -1,6 +1,6 @@
 # Taskatii
 
-Flutter application for tracking weight and related tasks.
+Flutter application for Tasks priotirizes tasks according to date.
 
 ---
 
